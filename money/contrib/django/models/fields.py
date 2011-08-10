@@ -104,7 +104,7 @@ class MoneyField(models.DecimalField):
         return value
 
     def contribute_to_class(self, cls, name):
-        if self.add_currency_field:
+        if self.add_currency_field and not cls._meta.abstract:
             c_field = CurrencyField(max_length=3, default=self.default_currency, editable=False)
             c_field.creation_counter = self.creation_counter+1
             cls.add_to_class(currency_field_name(name), c_field)
