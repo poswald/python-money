@@ -75,7 +75,7 @@ class MoneyField(models.DecimalField):
 
     def __init__(self, verbose_name=None, name=None,
                  max_digits=None, decimal_places=None,
-                 default=None, default_currency=None, blank=True, **kwargs):
+                 default=None, default_currency=None, blank=True, null=True, **kwargs):
         # We add the currency field except when using frozen south orm. See introspection rules below.
         self.add_currency_field = not kwargs.pop('no_currency_field', False)
         if isinstance(default, Money):
