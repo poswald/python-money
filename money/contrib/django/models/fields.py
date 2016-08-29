@@ -67,7 +67,7 @@ class MoneyFieldProxy(object):
         if value is None:  # Money(0) is False
             self._set_values(obj, None, '')
         elif isinstance(value, Money):
-            self._set_values(obj, value.amount, value.currency)
+            self._set_values(obj, value.amount, value.currency.code)
         elif isinstance(value, Decimal):
             _, currency = self._get_values(obj)  # use what is currently set
             self._set_values(obj, value, currency)
