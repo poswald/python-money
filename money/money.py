@@ -1,27 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import division, unicode_literals
 
+from collections import namedtuple
 from decimal import Decimal
 
 import six
 
 
-class Currency(object):
-    code = "XXX"
-    country = ""
-    countries = []
-    name = ""
-    numeric = "999"
-
-    def __init__(self, code="", numeric="999", name="", symbol=u"", decimals=2, countries=None):
+class Currency(namedtuple('Currency', ['code', 'numeric', 'name', 'symbol', 'decimals', 'countries'])):
+    def __new__(cls, code="", numeric="999", name="", symbol=u"", decimals=2, countries=None):
         if not countries:
             countries = []
-        self.code = code
-        self.numeric = numeric
-        self.name = name
-        self.symbol = symbol
-        self.decimals = decimals
-        self.countries = countries
+        self = super(Currency, cls).__new__(cls, code, numeric, name, symbol, decimals, countries)
+        return self
 
     def __repr__(self):
         return self.code
